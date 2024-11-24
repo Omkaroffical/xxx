@@ -1,0 +1,483 @@
+(1)	Bisection Method: Code:
+"""
+Name: Vedant Avhale
+Roll No.352002
+PRN No. 22211178
+"""
+
+import math as m
+def vedant(fun,x1,x2,acc,Maxitr):
+   while fun(x1)*fun(x2)>0:
+       print("WRONG INITAL GUESS")
+       x1= float(input("Enter the new value of x1: "))
+       x2= float(input("Enter the new value of x2: "))
+   for itr in range(Maxitr):
+       x0= (x1+x2)/2
+       if fun(x0)*fun(x1)<0:
+           x1=x1
+           x2=x0
+       elif fun(x0)*fun(x1)>0:
+           x1=x0
+           x2=x2
+   print("the root of given function =", x0)
+
+
+
+Input:
+vedant(lambda x: m.cos(x)-1.3*x,0.5,1,0.0001,10)
+	
+
+
+Output:
+  the root of given function = 0.62451171875 
+(2)	Newton Raphson Method: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Newton Raphson Method
+"""
+import math as m
+def Vedant(fun,dfun,ddfun,x1,acc,maxitr):
+  while abs(fun(x1)*ddfun(x1)/(dfun(x1))**2) > 1:
+    print("WRONG INITIAL GUESS")
+    x1 = float(input("Enter the New Value of x1:"))
+  for itr in range (maxitr):
+    x0 = x1 - fun(x1)/dfun(x1)
+    if abs(x1-x0) < acc:
+      break
+    x1 = x0
+  print("The root is: ", x0)
+
+
+Input:
+Vedant(lambda x: m.pow(x,4)-x-10,
+lambda x: 4*m.pow(x,3)-1, 
+lambda x: 12*m.pow(x,2),
+5,0.00001,100)
+
+
+
+
+Output:
+Enter the New Value of x1:-3
+  The root is:  1.8555845286409378 
+(3)	Gauss Elimination Method:
+
+Code:
+
+
+
+Input:
+
+
+Output:
+[[ 3.          0.1         0.          0.        ]
+ [ 0.         -3.06666667  2.          0.        ]
+ [ 0.          0.          2.65217391  5.        ]
+ [ 0.          0.          0.         -5.8852459 ]]
+[[ 5.        ]
+ [-8.33333333]
+ [-0.86956522]
+ [ 2.31147541]]
+[0. 0. 0. 0.] 
+(4)	Gauss-Seidal method: Code:
+
+
+Output:
+[2.99999999 2.00000001 1.	]
+ 
+(5)	Curve Fitting: Straight line : Code:
+"""
+Name:Vedant Avhale
+Roll No.: 352002
+Program: Straight line curve
+"""
+import numpy as np
+def vedant(x,y):
+  x = x.astype(float)
+  y = y.astype(float)
+  a = np.array([[len(x),sum(x)],[sum(x),sum(x*x)]])
+  d = np.array([[sum(y)],[sum(x*y)]])
+  b = np.linalg.solve(a,d)
+  print("Output")
+  print("y = %.4f + (%.4f) * x" %(b[0],b[1]))
+rushi(np.array([3,7,9,10]),np.array([168,120,72,63]))
+
+
+Input:
+vedant(np.array([3,7,9,10]),np.array([168,120,72,63]))
+	
+
+
+Output:
+Output
+    y = 217.9043 + (-15.4696) * xCurve Fitting: Parabola:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Code:
+
+"""
+Name:Vedant Avhale
+Roll No.:352002
+Program: Curve Fitting Parabola
+"""
+import numpy as np
+def vedant(x,y):
+  x = x.astype(float)
+  y = y.astype(float)
+  a = np.array([[len(x),sum(x),sum(x*x)],
+                [sum(x),sum(x*x),sum(x*x*x)],
+                [sum(x*x),sum(x*x*x),sum(x*x*x*x)]])
+  d = np.array([[sum(y)],
+                [sum(x*y)],
+                [sum(x*x*y)]])
+  b = np.linalg.solve(a,d)
+  print("y = %.4f + (%.4f) * x + (%.4f) * x ^ 2"%(b[0],b[1],b[2]))
+
+
+
+Input:
+vedant(np.array([300,350,400,450,500]),np.array([0.913,0.929,0.922,0.918,0.909]))
+	
+
+
+Output:
+     y = 0.7253 + (0.0010) * x + (-0.0000) * x ^ 2 
+(6)	Curve Fitting: Power equation Type 1: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Curve Fitting: Power equation Type 1
+"""
+import numpy as np
+def vedant(t,v):
+  t = np.array(t,dtype=float)
+  v = np.array(v,dtype=float)
+  Y = np.log(v)
+  X = np.log(t)
+  A = np.array([[len(X),sum(X)],[sum(X),sum(X*X)]])
+  C = np.array([[sum(Y)],[sum(X*Y)]])
+  B = np.linalg.solve(A,C)
+  a0 = B[0]
+  a1 = B[1]
+  alpha = np.exp(a0)
+  beta = a1
+  print("v = %4f * t ^ %4f"%(alpha,beta))
+
+
+
+
+Input:
+vedant(np.array([1,2,3,4,5]),np.array([12,4,1,2,7]))
+
+	
+
+
+Output:
+    v = 7.399360 * t ^ -0.730384 
+(7)	Curve Fitting: Power equation Type 2: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Curve Fitting: Power equation Type 2 
+"""
+import numpy as np 
+def vedant(t,N):
+  N = np.array(N,dtype=float)
+  X = np.array(t,dtype=float)
+  Y = np.log(N)
+  A = np.array([[len(X),sum(X)],[sum(X),sum(X*X)]])
+  C = np.array([[sum(Y)],[sum(X*Y)]])
+  B = np.linalg.solve(A,C) 
+  a0 = B[0]
+  a1 = B[1]
+  alpha = np.exp(a0)
+  beta = np.exp(a1)
+  print("N = %4f * %4f ^ t"%(alpha,beta))
+
+
+Input:
+vedant(np.array([0,5,10,15]),np.array([1.80,1.45,1.18,1.00]))
+	
+
+
+Output:
+N = 1.780025 * 0.961377 ^ t 
+(8)	Curve Fitting: Exponential equation: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Curve Fitting: Exponential equation
+"""
+import numpy as np 
+def vedant(x,y):
+  y = np.array(y,dtype=float)
+  x = np.array(x,dtype=float) 
+  Y = np.log(y)
+  A = np.array([[len(x),sum(x)],[sum(x),sum(x*x)]]) 
+  C = np.array([[sum(Y)],[sum(x*Y)]])
+  B = np.linalg.solve(A,C) 
+  a0 = B[0]
+  a1 = B[1]
+  a = np.exp(a0)
+  b = a1
+  print("y = %4f * e ^ (%4f * x)"%(a,b))
+
+
+Input:
+vedant(np.array([0,5,10,15]),np.array([1.80,1.45,1.18,1.00]))
+	
+
+
+Output:
+
+   y = 1.780025 * e ^ (-0.039388 * x) 
+(9)	Lagrange’s Interpolation: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Lagrange’s Interpolation
+"""
+import numpy as np 
+def vedant(x,y,xr):
+  x = x.astype(float)
+  y = y.astype(float)  
+  n = len(x)
+  yr = 0
+  for i in range(n):
+    L = 1
+    for j in range(n): 
+      if i !=j:
+        L = L*(xr-x[j])/(x[i]-x[j]) 
+        yr = yr + y[i] * L
+  print("y at x = %.4f is equal to %.4f"%(xr,yr))
+
+
+Input:
+vedant(np.array([0,1,2,5]),np.array([2,3,12,147]),3)
+
+	
+
+
+Output:
+   y at x = 3.0000 is equal to 219.3000 
+(10)	Newton’s Forward Difference Interpolation: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Newton’s Forward Difference Interpolation """
+import numpy as np 
+import math as m
+def vedant(x,y,xr):
+  x = np.array(x,dtype=float)
+  y = np.array(y,dtype=float) 
+  n = len(x)
+  delta = np.zeros((n-1,n-1)) 
+  for j in range (n-1):
+    for i in range ((n-1)-j):
+       if j == 0:
+        delta [i,j] = y[i+1] - y[i]
+       else:
+        delta[i,j] = delta[i+1,j-1] - delta[i,j-1] 
+        h = x[1] - x[0]
+  u = (xr - x[0])/h 
+  term = 0
+  mult = 1
+  for j in range (n-1):
+    mult = mult * (u-j)
+    term = term + delta[0,j] / m.factorial(j+1) * mult 
+  yr = y[0] + term
+  print("Answer =",yr)
+
+
+
+Input:
+vedant(np.array([0,1,2,5]),np.array([2,3,12,147]),3)   
+	
+
+
+Output:
+   Answer = 147.0 
+(11)	Trapezoidal rule:
+Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program:trapazodial Rule
+"""
+import math as m
+def vedant(fun,x0,xn,n):
+  h = (xn - x0) / n
+  y0 = fun(x0)
+  yn = fun(xn)
+  yr = 0
+  for i in range (1,n):
+    yr = yr + fun(x0 + i * h)
+  A = 1/2 * h * (y0 + yn + 2 * yr)
+  print("Area = ", A)
+rushi(lambda x: m.exp(x)/x,1,2,6)
+
+
+
+Input:
+
+
+Output:
+Area =  3.06633853465 
+(12)	Simpson’s 1/3rd Rule: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Simpson’s 1/3rd Rule
+"""
+import math as m
+def Vedant(fun,x0,xn,n):
+  h = (xn - x0) / n
+  y0 = fun(x0)
+  yn = fun(xn)
+  yodd = 0
+  yeven = 0
+  for i in range (1,n,2):
+    yodd = yodd + fun(x0 + i * h)
+  for j in range (2,n-1,2):
+    yeven = yeven + fun(x0 + j * h)
+
+  A = 1/3 * h * (y0 + yn + 4 * yodd + 2 * yeven)
+  print("Area = ", A)
+
+
+
+Input:
+Vedant(lambda x: m.exp(x)/x,1,2,6)	
+
+
+
+Output:
+   Area =  3.059142295954863 
+(13)	Simpson’s 3/8th Rule: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Simpson’s 3/8th Rule
+"""
+import math as m
+def vedant(fun,x0,xn,n):
+  h = (xn - x0) / n
+  y0 = fun(x0)
+  yn = fun(xn)
+  ym3 = 0
+  yr = 0
+  for i in range (3,n-2,3):
+    ym3 = ym3 + fun(x0 + i * h)
+  for j in range (1,n,1):
+    yr = yr + fun(x0 + j * h)
+  yr = yr - ym3
+
+  A = 3/8 * h * (y0 + yn + 3 * yr + 2 * ym3)
+  print("Area = ", A)
+
+
+
+Input:
+vedant(lambda x: m.exp(x)/x,1,2,6)
+	
+
+
+
+Output:
+Area =  3.059171761140915 
+(14)	Euler Method: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Euler’s Method
+"""
+import math as m
+def vedant(fun,x0,y0,xn,n):
+  h = (xn - x0) / n
+  for i in range (1,n+1):
+    ynew = y0 + h * fun(x0,y0)
+    x0 = x0 + h
+    y0 = ynew
+  print("xn = ", xn," ; yn = ", ynew)
+
+
+
+Input:
+vedant(lambda x,y: (y-x)/(y+x),0,1,1,5)
+
+
+Output:
+    xn =  1  ; yn =  1.5969395622558553 
+(15)	Runge-Kutta Methods- Second order: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Runge-kutta 2nd order method
+"""
+import math as m
+def vedant(fun,x0,y0,xn,n):
+  h = (xn - x0) / n
+  for i in range (1,n+1):
+    k1 = h * fun(x0,y0)
+    k2 = h * fun(x0+h,y0+k1)
+    ynew = y0 + 1/2 * (k1+k2)
+    x0 = x0 + h
+    y0 = ynew
+
+  print("xn = ", xn," ; yn = ", ynew)
+
+
+
+Input:
+vedant(lambda x,y:(y-x)/(x+y),0,1,1,5)
+
+Output:
+   xn =  1  ; yn =  1.5071384942099706 
+(16)	Runge-Kutta Methods- Fourth order: Code:
+"""
+Name: Vedant Avhale
+Roll No.: 352002
+Program: Runge-kutta 4rd order method
+"""
+import math as m
+def vedant(fun,x0,y0,xn,n):
+  h = (xn - x0) / n
+  for i in range (1,n+1):
+    k1 = h * fun(x0,y0)
+    k2 = h * fun(x0+h/2,y0+k1/2)
+    k3 = h * fun(x0+h/2,y0+k2/2)
+    k4 = h * fun(x0+h,y0+k3)
+    ynew = y0 + 1/6 * (k1+2*k2+2*k3+k4)
+    x0 = x0 + h
+    y0 = ynew
+
+  print("xn = ", xn," ; yn = ", ynew)
+
+
+
+Input:
+vedant(lambda x,y: (y-x)/(y+x),0,1,1,5)	
+
+
+
+Output:
+xn =  1  ; yn =  1.498311124810537
